@@ -1,0 +1,310 @@
+\documentclass[10pt]{article}
+
+\usepackage[letterpaper, portrait, margin=1.25in]{geometry}
+
+\usepackage{authblk}
+\usepackage[yyyymmdd,hhmmss]{datetime}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{ASTR 324: Introduction to AstroStatistics and Big Data in Astronomy}
+\rhead{Spring 2018}
+\rfoot{\em \tiny Compiled on \today\ at \currenttime}
+\cfoot{\thepage}
+\lfoot{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% author-defined commands
+\newcommand\about     {\hbox{$\sim$}}
+\newcommand\x         {\hbox{$\times$}}
+\newcommand\othername {\hbox{$\dots$}}
+\def\eq#1{\begin{equation} #1 \end{equation}}
+\def\eqarray#1{\begin{eqnarray} #1 \end{eqnarray}}
+\def\eqarraylet#1{\begin{mathletters}\begin{eqnarray} #1 %
+                  \end{eqnarray}\end{mathletters}}
+\def\non    {\nonumber \\}
+\def\DS     {\displaystyle}
+\def\E#1{\hbox{$10^{#1}$}}
+\def\sub#1{_{\rm #1}}
+\def\case#1/#2{\hbox{$\frac{#1}{#2}$}}
+\def\about  {\hbox{$\sim$}}
+\def\x      {\hbox{$\times$}}
+\def\ug               {\hbox{$u-g$}}
+\def\gr               {\hbox{$g-r$}}
+\def\ri               {\hbox{$r-i$}}
+\def\iz               {\hbox{$i-z$}}
+\def\a                {\hbox{$a^*$}}
+\def\O                {\hbox{$O$}}
+\def\E                {\hbox{$E$}}
+\def\Oa               {\hbox{$O_a$}}
+\def\Ea               {\hbox{$E_a$}}
+\def\Jg               {\hbox{$J_g$}}
+\def\Fg               {\hbox{$F_g$}}
+\def\J                {\hbox{$J$}}
+\def\F                {\hbox{$F$}}
+\def\N                {\hbox{$N$}}
+\def\dd               {\hbox{deg/day}}
+\def\mic              {\hbox{$\mu{\rm m}$}}
+\def\Mo{\hbox{$M_{\odot}$}}
+\def\Lo{\hbox{$L_{\odot}$}}
+\def\comm#1           {\tt #1}
+\def\refto#1          {\ref #1}
+\def\T#1              {({\bf #1})}
+\def\H#1              {({\it #1})}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{ASTR 324: AstroStatistics}
+%\author{\v{Z}eljko Ivezi\'{c}  \& Mario Juri\'{c}}
+\author{\v{Z}eljko Ivezi\'{c}}
+\affil{University of Washington, Spring Quarter 2026}
+\date{\vspace{-5ex}}
+
+\begin{document}
+\maketitle
+
+\vskip 0.3in
+\leftline{{\bf  Location and Time:} Tuesdays and Thursdays 10:00-11:20am, {\bf PAA 210}}
+
+\vskip 0.2in
+\leftline{{\bf  Office Hours:} { Any time when my office doors are open; }}
+\leftline{\hskip 1.15in After Thu class, or Tue afternoon are the best.}
+\vskip 0.2in
+\leftline{{\bf  Grading:} 10 homeworks, 8\% each; final exam: 20\%}
+\leftline{                 \hskip 0.8in key: $>$90\%=A, $>$80\%=B, $>$70\%=C, $>$50\%=D.}
+\vskip 0.2in
+\leftline{{\bf  Class web site:}   https://github.com/uw-astr-324/astr-324-s26}
+\vskip 0.2in
+\leftline{{\bf  Reference textbook:} (not required)}
+\leftline{Ivezi\'{c}, Connolly, VanderPlas \& Gray: {\it Statistics, Data Mining, and Machine Learning in Astronomy: }}
+\leftline{{\it A Practical Python Guide for the Analysis of Survey Data} (Princeton University Press, 2014)}
+\leftline{See http://press.princeton.edu/titles/10159.html}
+\vskip 0.3in
+
+{\bf Learning Goals:}
+
+This course will introduce students to most common statistical and computer science methods 
+used in astronomy and other physical sciences. It will combine theoretical background with 
+examples of data analysis based on modern astronomical datasets. Practical data analysis 
+will be done using python tools, with emphasis on astroML module (see www.astroML.org). 
+While focused on astronomy, this course should be useful to all students interested in data 
+analysis in physical sciences and engineering. The lectures will be aimed at undergraduate 
+students and the main discussion topics will be based on  Chapters 4 and 5, and selected 
+topics from Chapters 6-10, from the reference textbook. 
+
+By taking this course, students will develop basic understanding of topics such as robust 
+statistics, hypothesis testing, maximum likelihood analysis, Bayesian statistics, model 
+parameter estimation, the goodness of fit and model selection, density estimation and 
+clustering, unsupervised and supervised classification, dimensionality reduction, 
+regression and time series analysis. Most of these topics will be applied in class homeworks 
+to analysis of astronomical data. 
+
+{\bf Prerequisites:}
+
+The students taking this class are required to have basic calculus and basic python skills, 
+as well as basic scientific measurements and statistics skills at the level of a freshman lab. 
+
+{\bf Lecture format:}
+
+New material will typically be covered during the first class in a week, while
+the second class in a week will be more focused on practical data analysis work. 
+
+\newpage 
+% \vskip 0.2in
+\leftline{\bf  Class Schedule:}
+\begin{itemize}
+\item WEEK 1 (Mar 31/Apr 2): {\bf Overview of the course and
+    introduction to statistics.} 
+      Introduction to class: syllabus, literature, astroML, python,
+      jupyter notebooks, GitHub. 
+   Basics about statistics.
+   Distributions and Random samples.
+   Robust statistics.
+
+\item WEEK 2 (Apr 7/Apr 9): {\bf Maximum Likelihood Estimation method}
+What likelihood is and what it is good for?
+Simple examples of MLE: one-dimensional Gaussian.
+MLE in action: fitting a parametrized model with heteroscedastic gaussian errors on y axis.
+Goodness of fit.
+Cost functions and penalized likelihood.
+Non-gaussian likelihood: binomial distribution (coin flip problem).
+Conceptual difficulties with the MLE (example: "waiting for a bus" problem).
+ 
+\item WEEK 3 (Apr 14/Apr 16): {\bf Introduction to Bayesian statistics and inference}
+Bayes Rule extended to Bayesian Inference.
+The role of priors in Bayesian Inference.
+A simple parameter estimation example.
+Nuisance parameters and marginalization.
+
+
+\item WEEK 4 (Apr 21/Apr 23): {\bf Applications of Bayesian statistics and inference}
+  % Apr 23: OSU colloquium 
+Simple parameter estimation examples.
+Bayesian model selection.
+Simple model selection examples.
+For overachievers: ABC and Hierarchical Bayes. {\it No in-class lecture on Apr 23.}
+
+\item WEEK 5 (Apr 28/Apr 30): {\bf Introduction to Markov Chain Monte Carlo}
+      % Apr 30 remote (Paris) 
+   Introduction to MCMC.
+   Non-linear Regression with MCMC. {\it No in-class lecture on Apr 30.}
+
+\item WEEK 6 (May 5/May 7): {\bf Bayesian model selection with MCMC}
+  Model selection example: finding bursts in time series.
+Bayesian Blocks Algorithm.
+
+
+\item WEEK 7 (May 12/May 14): {\bf Density Estimation}
+  Searching for Structure in 1-D Point Data.
+Gaussian Mixture Models.
+Extreme Deconvolution.
+
+\item WEEK 8 (May 19/May 21): {\bf Clustering (Unsupervised Classification)}
+ % May 21: Caltech colloquium 
+Introduction to Clustering. 
+K-means clustering algorithm.
+Clustering with Gaussian Mixture models (GMM).
+Hierarchical clustering algorithm. {\it No in-class lecture on May 21.}
+
+
+\item WEEK 9 (May 26/May 28): {\bf Supervised Classification}
+Introduction to Supervised Classification.
+An example of a discriminative classifier: Support Vector Machine classifier.
+An example of a generative classifier: star/galaxy separation using Gaussian Naive Bayes classifier.
+Comparison of many methods using ROC curves.
+
+ \item WEEK 10 (June 2/June 4): {\bf Dimensionality Reduction}
+The curse of dimensionality.
+Principal Component Analysis.
+Comparing PCA, NMF and ICA. 
+
+\item {\bf FINAL EXAM: June 8 (Monday, 10:30am-12:20pm, PAA 210):} closed book final exam.
+
+\end{itemize}
+
+
+\vskip 0.2in
+
+\leftline{\bf  Homework}
+
+There will be ten homeworks, assigned on Thursdays, and due next Thursday. They will
+be centered on practical work using python and designed to test the weekly progress. 
+
+We will use modern software engineering tools, GitHub and Jupyter notebooks, for HW submission. 
+
+\end{document}
+
+
+
+
+
+
+% Week-1-Tue.key 
+%     intro to class, big data, LSST and astroML 
+% Week-1-Thu.ipynb
+%     setup: github, class repo, astroML repo, 
+\item WEEK  2 (starting Apr 3): Introduction to statistics (probability, distributions, 
+             robust statistics, Central Limit Theorem,  hypothesis testing).
+% Week-2-Tue.ipynb
+%     stats intro, estimators, moments 
+% Week-2-Thu.ipynb
+%     CLT, multi-variate distributions, chi2, intro to histograms 
+\item WEEK  3 (starting Apr 10):  Maximum likelihood and applications in astronomy.
+% Week-3-Tue.ipynb
+%     MLE, homoscedastic Gaussian, goodness-of-fit  
+% Week-3-Thu.ipynb
+%     LSQ, fitting straight line, optimal photometry 
+\item WEEK  4 (starting Apr 17):  Bayesian statistics and introduction to MCMC.
+% Week-4-Tue.ipynb
+%     introduction to Bayesian inference, priors, heteroscedastic Gaussian, 
+% Week-4-Thu.ipynb
+%     Bayesian model selection, binomial distribution, Bayes factor, BIC, Knuth's hist., Bayesian Blocks 
+\item WEEK  5 (starting Apr 24):  Model parameter estimation and model selection.
+% Week-5-Tue.ipynb
+%     Parameter estimation with MCMC
+% Week-5-Thu.ipynb
+%     Model selection using MCMC
+
+% --------------------------------------------------------------------
+\item WEEK  6 (starting May 1):   Time series analysis.
+% Week-6-Tue.ipynb
+%     into, Fourier analysis, gatspy, Lomb-Scargle periodogram
+% Week-6-Thu.ipynb
+%     stochastic time series, DRW, power-law PSD
+%    HW5 <HW6 from s17-private (LINEAR periodic variables)
+
+\item WEEK  7 (starting May 8): Dimensionality reduction and regression.
+% Week-7-Tue.key 
+%          Dimensionality reduction and regression 
+% Week-7-Thu.key 
+% Week-7-Thu.ipynb:  total LSQ, linear basis function regression 
+%      HW6  <- HW8 from s17-private  (PCA in 4D LINEAR-based space, age-color regression) 
+
+\item WEEK  8 (starting May 15):  review and Gwen 
+
+
+
+\item WEEK  9 (starting May 22):  Density estimation and clustering.
+
+% Week-9-Tue.key  -> Density Estimation. I    (24 pages) 
+%      review of histograms, Bayesian Blocks, GMMs, 1-D KDE, data smoothing 
+%   Week-9-Tue.ipynb
+%        1-D GMM examples 
+%        multi-D GMM examples with LINEAR  
+
+% Week-9-Thu.key  -> Density Estimation. II   (17 pages) 
+%      2D KDE, Bayesian NN, parametric density estimation, GMM and EM method, XD, 39 pages
+%    Week-9-Thu.ipynb 
+%              GMM clustering for sin(i) vs. a for asteroids  (same as Week-10-Tue.ipynb !!!) 
+%                        better to find other examples of multi-D clustering, e.g. XD !!!      
+%         %%%  perhaps 1D simulation with 3 gaussians convolved with errors and then XD? 
+
+
+% in grad version from W17, Andy's notebooks:
+% Week-8-Tue.ipynb   Density estimation
+% Week-8-Thu.ipynb   Classification 
+
+% HW 7 is ready!!!   KDE and GMM for LINEAR data (and  no other homeworks needed!) 
+
+
+\item WEEK  10 (starting May 29):  Unsupervised and supervised classification.
+% Week-10-Tue.key   (17 pages)    A BIT OF REPEAT OF WEEK 9 - a review?  
+%      	•	Clustering (unsupervised classification)  
+%                   – 1-D hypothesis testing                                                      
+%                   – clustering with Gaussian Mixture models (GMM)    
+%                   – K-means clustering algorithm                     
+%                   – hierarchical clustering algorithm 
+% Week-10-Tue.ipynb      
+%              GMM clustering for sin(i) vs. a for asteroids  and hierarchical clustering for asteroids 
+%                      (very short, find another example, perhaps LINEAR? see Thu notebook) 
+
+% Week-10-Thu.key   (18 pages) 
+%	•	(supervised) Classification        
+%                   – potpourri of supervised classification methods: naive Bayes, 
+%                           quadratic discriminant analysis, GMM, KNN, support vector machines
+%                   – classification comparison with ROC curves
+% Week-10-Thu.ipynb     (expand?) 
+%            supervised classification for LINEAR variables and ROC curves 
+
+ * Lecture 17: [Unsupervised Classification](Week-10-Tue.key) [(notebook)](Week-10-Tue.ipynb)
+ * Lecture 18: [Supervised Classification](Week-10-Thu.key) [(notebook)](Week-10-Thu.ipynb)
+
+
+
+\item FINAL EXAM: June 6 (Tue, 2:20pm, B360): cake and closed book final exam.
+
+\end{itemize}
+
+
+\vskip 0.2in
+
+\leftline{\bf  Homework}
+
+There will be ten homeworks, assigned on Thursdays, and due next Thursday. They will
+be centered on practical work using python and designed to test the weekly progress. 
+
+We will use modern software engineering tools, GitHub and Jupyter notebooks for HW submission. 
+
+\end{document}
+
